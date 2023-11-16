@@ -15,9 +15,7 @@ public class Directory {
             directoryEntries.add(new DirectoryEntry( splitEntry[1], Integer.parseInt(splitEntry[0])));
         }
     }
-
     public List<DirectoryEntry> getDirectoryEntries() {
         return this.directoryEntries;
     }
-
 }

@@ -80,7 +80,7 @@ files:
   - name: src/phonebook/Visitor.java
     visible: true
     learner_created: true
-feedback_link: https://hyperskill.org/projects/63/stages/340/implement#comment
+feedback_link: https://hyperskill.org/learn/step/5482#comment
 status: Solved
 feedback:
   message: Congratulations!

@@ -1,5 +1,6 @@
 package phonebook;
 
 public interface Visitor {
-    int visitLinearSearch(LinearSearch linSearch);
+    void visitLinearSearch(LinearSearch linSearch);
+    void visitJumpSearch(JumpSearch jumpSearch);
 }

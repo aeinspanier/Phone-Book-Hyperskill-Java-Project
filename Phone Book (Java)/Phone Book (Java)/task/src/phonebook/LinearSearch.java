@@ -1,28 +1,43 @@
 package phonebook;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class LinearSearch implements Search {
-    Directory directory;
     List<String> names;
+    Directory directory;
+    long startSearch;
+    long endSearch;
+    long searchTime;
+    int found = 0;
+
     public LinearSearch(Directory directory, List<String> names) {
-        this.directory = directory;
         this.names = names;
+        this.directory = directory;
     }
 
-    public int accept(Visitor visitor) {
-        return visitor.visitLinearSearch(this);
+    public void accept(Visitor visitor) {
+        visitor.visitLinearSearch(this);
     }
 
-    public int search(List<DirectoryEntry> directoryEntries) {
-        int found = 0;
+    public void printStats() {
+        this.searchTime = this.endSearch - this.startSearch;
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(this.searchTime);
+        long seconds = (TimeUnit.MILLISECONDS.toSeconds(this.searchTime) % 60);
+        long ms = this.searchTime - (minutes * 1000 * 60) - (seconds * 1000);
+        System.out.printf("Found %d / %d entries. Time taken: %d min. %d sec. %d ms.\n", this.found, this.names.size(), minutes, seconds, ms);
+    }
+
+    public void search() {
+        this.startSearch = System.currentTimeMillis();
+        List<DirectoryEntry> directoryEntries = this.directory.getDirectoryEntries();
         for (String name : this.names) {
             for (DirectoryEntry entry : directoryEntries) {
                 if (name.equals(entry.name)) {
-                    found++;
+                    this.found++;
                 }
             }
         }
-        return found;
+        this.endSearch = System.currentTimeMillis();
     }
 }
