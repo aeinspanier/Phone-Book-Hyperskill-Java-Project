@@ -10,11 +10,13 @@ import java.util.concurrent.TimeUnit;
 public class SearchVisitor implements Visitor{
 
     HashMap<String, Search> searches = new HashMap<>();
-    String[] searchOrder = {"LinearSearch", "JumpSearch"};
+    String[] searchOrder = {"LinearSearch", "JumpSearch", "BinarySearch", "HashTableSearch"};
 
     public SearchVisitor(Directory directory, List<String> names) {
         searches.put("LinearSearch", new LinearSearch(directory, names));
         searches.put("JumpSearch", new JumpSearch(directory, names));
+        searches.put("BinarySearch", new BinarySearch(directory, names));
+        searches.put("HashTableSearch", new HashTableSearch(directory, names));
     }
 
     public void visitAllAlgorithms() {
@@ -40,4 +42,19 @@ public class SearchVisitor implements Visitor{
         jumpSearch.search();
         jumpSearch.printStats();
     }
+
+    @Override
+    public void visitBinarySearch(BinarySearch binSearch) {
+        System.out.println("Start searching (quick sort + binary search)...");
+        binSearch.search();
+        binSearch.printStats();
+    }
+
+    @Override
+    public void visitHashTableSearch(HashTableSearch hashSearch) {
+        System.out.println("Start searching (hash table)...");
+        hashSearch.search();
+        hashSearch.printStats();
+    }
+
 }
